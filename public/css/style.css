@@ -1,0 +1,329 @@
+.hero-section {
+    background-image: url('../images/logo3.jpg');
+    background-size: cover;
+    background-position: 65% 65%;
+    height: 100vh;
+}
+
+.navbar {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+.navbar-img {
+    width: 150px;
+}
+
+.bg-light {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.bg-grey {
+    background-color: #F6F6F6 !important;
+}
+
+.nav-link {
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.caption-kanan {
+    margin-top: 20%;
+    color: rgb(250, 250, 250);
+    background-color: rgba(24, 24, 24, 0.466);
+    padding: 20px 80px 20px 20px;
+    border-radius: 10px;
+}
+
+.btn-login {
+    background-color: #d4a01c;
+    border: 0;
+    padding: 5px 10px;
+    margin-top: -5px;
+    border-radius: 5px;
+    color: #ffff;
+    font-weight: 500;
+}
+
+.btn-caption {
+    padding: 9px 23px;
+    background-color: #c9981e;
+    color: rgb(250, 250, 250);
+    border: 0;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.mb-20 {
+    margin-bottom: 30px;
+}
+
+.f-14 {
+    font-size: 17px;
+}
+
+/* GALERI */
+.galeri {
+    margin: 50px auto;
+}
+
+.judul-section {
+    border-bottom: 4px solid #c9981e;
+    width: 25%;
+    margin: 0 auto;
+    color: rgba(0,0,0,.55);
+}
+
+.isi-galeri {
+    margin-top: 50px;
+}
+
+.card-1 {
+    box-shadow: 0 0 13px -6px grey;
+    border: 0;
+}
+
+.card-title {
+    color: #c9981e !important;
+    font-size: 16px;
+}
+
+/* base user (produk,pesanan,kontak,carapesan */
+/* produk */
+.section-produk {
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.btn-kategori {
+    border: 0;
+    color: #fff;
+    background-color: #c9981e;
+    padding: 10px 100px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.gambar-navbar {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-top: 100px;
+}
+
+.brand {
+    background-color:  rgba(255, 255, 255, 0);
+    position: absolute;
+    top: 31%;
+    left: 20%;
+    right: 20%;
+    text-align: center;
+    color: #c9981e;
+}
+
+.produk {
+    /* margin-right: 10px; */
+    border: 1px solid black;
+}
+
+.img-produk {
+    width: 100%;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.ct-2 {
+    font-weight: bold;
+}
+
+.btn-produk {
+    border: 0;
+    color: #fff;
+    background-color: #c9981e;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 0 13px -6px grey;
+}
+
+.card-body {
+    background-color: #f6f6f6;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* halaman contact */
+.contact {
+    margin-top: 20px;
+}
+
+.kontak {
+    padding: 20px;
+    font-size: 14px;
+    color: rgba(0,0,0,.55);
+    font-weight: 500;
+}
+
+.isi-kontak {
+    font-size: 14px;
+    color: rgba(0,0,0,.55);
+    font-weight: 500;
+    margin-bottom: -5px;
+}
+
+.isi-kontak i {
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.garis-kontak {
+    margin-top: 5px;
+}
+
+.kontak h2 {
+    margin-bottom: 20px;
+    color: #c9981e;;
+}
+
+.gambar-map {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 0 13px -6px grey;
+    margin-left: 20px;
+}
+
+.card-kontak {
+    margin-top: -40%;
+    background-color: #ffff;
+    border-radius: 6px;
+    box-shadow: 0 0 13px -6px grey;
+}
+
+/* halaman cara pemesanan */
+.cara-pesan {
+    margin-top: 30px;
+}
+
+.judul-section2 {
+    border-bottom: 4px solid #c9981e;
+    width: 30%;
+    margin: 0 auto;
+    color: rgba(0,0,0,.55);
+    margin-bottom: 30px;
+}
+
+.cara_pesan_body {
+    margin-top: 30px;
+    background-color: #f6f6f6;
+    padding: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    box-shadow: 0 0 11px -5px rgb(143, 143, 143);
+    margin-bottom: -3px;
+    padding-left: 20px;
+}
+
+
+.cara_pesan_body p {
+    margin-top: 12px;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* footer */
+.footer {
+    margin-top: 50px;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    padding: 30px 0 10px 0;
+    font-weight: bold;
+    color: #c9981e;
+}
+
+/* register-user */
+.login-caption {
+    /* width: 100%; */
+    margin-top: -40%;
+    background-color: rgba(34, 34, 34, 0.568);
+    padding: 25px;
+    border-radius: 10px;
+    margin-left: 33%;
+    margin-right: 33%;
+    box-shadow: 0 0 13px -6px rgb(75, 75, 75);
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffff;
+}
+
+@media (max-width: 768px) {
+    .login-caption {
+        margin-top: -130%;
+        background-color: rgba(34, 34, 34, 0.568);
+        padding: 20px;
+        border-radius: 10px;
+        margin-left: 10%;
+        margin-right: 10%;
+        box-shadow: 0 0 13px -6px rgb(75, 75, 75);
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffff;
+    }
+}
+
+.btn-register{
+    width: 100%;
+    background-color: #c9981e;
+    border: 0;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+}
+
+/* halaman detail produk */
+.detail_produk{
+    margin-top: 140px;
+}
+
+.detail_produk_img{
+    width: 100%;
+    border-radius: 6px;
+}
+
+.deskripsi{
+    padding: 0 10px;
+    color: #3C3C3C;
+    border-radius: 6px;
+}
+
+.form_pesanan{
+    margin-top: 30px;
+    background-color: #F6F6F6;
+    padding: 15px 30px;
+    border-radius: 6px;
+    color: #3C3C3C;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-pesan{
+    float: right;
+    background-color: #c9981e;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}

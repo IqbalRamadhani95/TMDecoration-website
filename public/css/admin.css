@@ -1,0 +1,15 @@
+.btn-ubah {
+    border: 0;
+    background-color: rgb(248, 182, 0);
+    color: #ffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-hps {
+    border: 0;
+    background-color: red;
+    color: #ffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
