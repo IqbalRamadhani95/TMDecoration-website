@@ -28,7 +28,7 @@
                       <a class="nav-link" href="#">Pesanan</a>
                       <a class="nav-link">Cara pemesanan</a>
                       <a class="nav-link" href="/contact" >Kontak kami</a>
-                      <a class="nav-link" href="/login-user" >
+                      <a class="nav-link" href="/loginUser" >
                         <button class="btn-login d-flex">
                           <i class="fas fa-sign-in-alt" style="align-self: center; color:#ffff; margin-right: 5px;"></i>
                           Login
@@ -58,15 +58,17 @@
               </div>
             @endif
             
-            <form action="/login-user" method="post">
+
+
+            <form action="/loginUser" method="post">
               @csrf
               <div class="login-judul text-center">
-                <h2 style="color: #c9981e;;">Selamat Datang</h2>
+                <h2 style="color: #ffff;">Selamat Datang</h2>
               </div>
               <div class="mb-3">
-                <label for="username_pelanggan" class="form-label @error('username_pelanggan') is-invalid @enderror">Username</label>
-                <input type="text" class="form-control" id="username_pelanggan" name="username_pelanggan" required value="{{ old('username_pelanggan') }}">
-                @error('username_pelanggan')
+                <label for="username" class="form-label @error('username') is-invalid @enderror">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required value="{{ old('username') }}">
+                @error('username')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>

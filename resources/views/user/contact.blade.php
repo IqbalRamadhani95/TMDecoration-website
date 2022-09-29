@@ -3,7 +3,10 @@
     <!-- section-navbar -->
         @section('konten')
     <!--end section-navbar -->
-    
+    <div class="gambar">
+      <img src="./images/logo.jpg" alt="" class="img-responsive gambar-navbar">
+  </div>
+
      <!-- section utama contact -->
      <div class="container">
         <div class="contact">
@@ -12,7 +15,7 @@
                   <div class="card-kontak">
                       <div class="card-body-kontak">
                         <div class="kontak">
-                          <h2>Kontak Kami</h2>
+                          <h4>Hubungi Kami</h4>
                           <p>SMS / Whatsapp :</p>
                           <div class="d-flex isi-kontak">
                             <i class="bi bi-whatsapp"></i>

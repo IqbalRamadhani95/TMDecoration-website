@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\keranjang;
 use App\Models\pelanggan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -10,7 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class login_user_controller extends Controller
 {
     public function index(){
-        return view('user.login_user');
+        $data = [
+            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
+                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
+        ];
+        return view('user.login_user', $data);
     }
 
     public function login_action(Request $request){

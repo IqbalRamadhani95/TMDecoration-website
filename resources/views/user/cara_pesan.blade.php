@@ -8,7 +8,7 @@
             </div>
             <div class="cara_pesan_body d-flex" style="align-items: center">
                 <img src="./images/icon_web.png" alt="" style="width: 50px;">
-                <p>1. Buka Website www.Tunas-Muda-Decoration.com</p>
+                <p>1. Lakukan login atau registrasi terlebih dahulu</p>
             </div>
             <div class="cara_pesan_body d-flex" style="align-items: center">
                 <img src="./images/icon_produk.png" alt="" style="width: 50px;">

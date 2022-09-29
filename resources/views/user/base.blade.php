@@ -6,46 +6,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/all.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="{{asset('/css/all.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/style.css')}} ">
     <title>Tunas Muda</title>
 </head>
 <body>
     <!-- section-navbar -->
     <div class="navbar-section">
-    <nav class="navbar navbar-expand-lg navbar-light {{request()->is('/')? 'bg-light':'bg-grey'}} fixed-top">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-                <img src="./images/Tunas-Muda1.png" alt="" class="img-responsive navbar-img">
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                  <a class="nav-link" aria-current="page" href="/">Beranda</a>
-                  <a class="nav-link" href="/produk">Produk</a>
-                  <a class="nav-link" href="#">Pesanan</a>
-                  <a class="nav-link" href="/cara_pesan" >Cara pemesanan</a>
-                  <a class="nav-link" href="/contact">Kontak kami</a>
-                  <a class="nav-link" href="/login-user" >
+      <nav class="navbar navbar-expand-lg navbar-light {{request()->is('/')? 'bg-light':'bg-grey'}} fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="{{asset('/images/Tunas-Muda1.png')}}" alt="" class="img-responsive navbar-img">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link" aria-current="page" href="/">Beranda</a>
+              <a class="nav-link" href="/produk">Produk</a>
+              <a class="nav-link" href="/cara_pesan" >Cara pemesanan</a>
+              <a class="nav-link" href="/contact">Kontak kami</a>
+              <a href="/pesanan" class="nav-link">Pesanan</a>
+
+              @if (Route::has('loginUser'))
+                @auth
+                  <div class="cart">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <i class="bi bi-cart3"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="text-center" style="color: #3C3C3C; font-weight:bold;">List Pesanan</li>
+                        <li><hr class="dropdown-divider"></li>
+                        @if (sizeof($keranjang) != 0)
+                            
+                        
+                            
+                      
+                        @foreach ($keranjang as $item)
+                          <li class="dropdown-item">
+                            <div class="row">
+                              <div class="col-md-3">
+                                <img src="/storage/images/{{$item->foto}}" alt="" class="img-keranjang">
+                              </div>
+                              <div class="col-md-6" style="font-size: 14px; font-weight:500;">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <p>
+                                      {{$item->nama_produk}}
+                                      <p style="margin-top: -10px;">{{$item->harga_sewa}}</p>
+                                    </p>
+                                  </div>
+                                  <div class="col-md-6 text-center">
+                                    {{$item->jml_keranjang}}
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-3">
+                                <form action="/hapus_keranjang" method="post">
+                                  @csrf
+                                  <input type="hidden" name="id_keranjang" value="{{ $item->id_keranjang }}">
+                                  <button type="submit" class="btn btn-hapusKeranjang">
+                                    <i class="bi bi-trash3"></i>
+                                  </button>
+                                </form>
+                              </div>
+                            </div>
+                          </li>
+                        @endforeach
+                        @else
+                          <li class="dropdown-item text-center">
+                            <p>produk kosong</p>
+                          </li>
+                        @endif
+                        <li><hr class="dropdown-divider"></li>
+                        <li class="text-center">
+                          <form action="" method="">
+                            <button class="btn btn-bayar">
+                              Bayar
+                            </button>
+                          </form>
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+
+                  <div class="auth-user">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <i class="bi bi-person-fill"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="text-center" style="color: #3C3C3C; font-weight:bold;">{{ Auth::User()->name }}</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/profil-user">Profil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a></li>
+                      </ul>
+                    </li>
+                    <form id="logout-form" action="/logout" method="POST">
+                      @csrf
+                    </form>
+                  </div>
+                @else
+                  <a class="nav-link" href="/loginUser" >
                     <button class="btn-login d-flex">
                       <i class="fas fa-sign-in-alt" style="align-self: center; color:#ffff; margin-right: 5px;"></i>
                       Login
                     </button>
                   </a>
-                </div>
-              </div>
+                @endauth
+              @endif
             </div>
-          </nav>
+          </div>
+        </div>
+      </nav>
     </div>
     <!--end section-navbar -->
-    <div class="gambar">
-        <img src="./images/logo.jpg" alt="" class="img-responsive gambar-navbar">
-    </div>
-    {{-- <div class="brand">
-      <h1>Tunas Muda Decoration</h1>
-    </div> --}}
     
     @yield('konten')
 

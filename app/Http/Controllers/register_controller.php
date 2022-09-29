@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\keranjang;
 use App\Models\pelanggan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class register_Controller extends Controller
 {
     public function index() {
-        return view('user.register_user');
+        $data = [
+            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
+            ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
+        ];
+        return view('user.register_user', $data);
     }
 
     public function store(Request $request) {
@@ -21,23 +27,16 @@ class register_Controller extends Controller
             'konfirmasi_password' => 'min:6'
         ]);
 
-        $pelanggan = new pelanggan([
+        $pelanggan = new user([
             'id' => $request->id,
             'nama_pelanggan' => $request->nama_pelanggan,
             'no_telp_pelanggan' => $request->no_telp_pelanggan,
-            'alamat_pelanggan' => $request->alamat_pelanggan,
             'username_pelanggan' => $request->username_pelanggan,
             'password_pelanggan' => $request->password
         ]);
 
         $pelanggan->save();
         return redirect('/login-user')->with('success', 'registrasi berhasil, silahkan login');
-
-        // if($pelanggan){
-        //     return redirect('/')->with(['Success' => 'Data telah ditambahkan']);
-        // } else {
-        //     return redirect('/register')->with(['success' => 'Data gagal ditambahkan']);
-        // }
     }
 }
 

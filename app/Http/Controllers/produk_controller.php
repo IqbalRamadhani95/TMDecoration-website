@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\keranjang;
 use App\Models\produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class produk_controller extends Controller
 {
@@ -19,7 +21,9 @@ class produk_controller extends Controller
     public function indexUser()
     {
         $data = [
-            'produk' => produk::all()
+            'produk' => produk::all(),
+            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
+            ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
         ];
 
         return view('user.daftar_produk', $data);
@@ -98,19 +102,6 @@ class produk_controller extends Controller
                 'harga_sewa'   => $request->harga_sewa
             ]);
         }
-
-        //upload image
-        // $gambar = $request->file('gambar_produk');
-        // $gambar->storeAs('public/images', $gambar->hashName());
-
-        // produk::where('id', $request->id)->update([
-        //     'foto'     => $gambar->hashName(),
-        //     'nama_produk'     => $request->nama_produk,
-        //     'deskripsi'   => $request->deskripsi_produk,
-        //     'jumlah_produk'   => $request->jumlah_produk,
-        //     'harga_sewa'   => $request->harga_sewa
-        // ]);
-        
         return redirect()->route('rute_produk_adm')->with(['success' => 'Data Berhasil Disimpan!']);
 
     }

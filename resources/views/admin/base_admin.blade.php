@@ -150,7 +150,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
+          <i class="fas fa-th-large"></i>login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.logout') }}" role="button">
+          logout
         </a>
       </li>
     </ul>
@@ -173,7 +178,7 @@
           <img src="./admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin 1</a>
+          <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
         </div>
       </div>
 
@@ -211,9 +216,17 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/users-adm" class="nav-link">
+              <p>
+                Pelanggan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <p>
-                Pesanan
+                Daftar Pesanan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

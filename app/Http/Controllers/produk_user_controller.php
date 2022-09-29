@@ -1,21 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\keranjang;
 use App\Models\produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class produk_user_controller extends Controller
 {
-    public function index($id) {
-        $data = produk::where('id', $id)->first();
+    public function index(){
+        $data = [
+            'product' => produk::all(),
+            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
+            ->where('id_pelanggan', Auth::check() ? Auth::user()->id : null)->get()
+        ];
+        return view('user.daftar_produk', $data);
+    }
 
-        if ($data) {
-            $data = array('title' => $data->nama_produk,
-                        'data' => $data);
-            return view('user.detail_produk', $data);            
-        } else {
-            // kalo produk ga ada, jadinya tampil halaman tidak ditemukan (error 404)
-            return abort('404');
-        }
+    public function detailProduk(Request $request)
+    {
+        $data = [
+            'produk'=>produk::where('id', $request->id)->first(),
+            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
+                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)
+                ->select('keranjang.*','keranjang.jumlah_produk as jml_keranjang','produk.*')->get()
+        ];
+        // dd($data);
+        return view('user.detail_produk', $data);
+
+    }
+
+    public function tambahKeranjang(){
+        
     }
 }

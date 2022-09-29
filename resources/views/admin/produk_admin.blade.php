@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">anjay</li>
+                            <li class="breadcrumb-item active">-</li>
                         </ol>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/produk/insert" method="post" enctype="multipart/form-data">
+                        <form action="/produk-adm/insert" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -82,14 +82,10 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+        <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                            </div> --}}
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>

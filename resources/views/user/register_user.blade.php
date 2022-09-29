@@ -28,7 +28,7 @@
                       <a class="nav-link" href="#">Pesanan</a>
                       <a class="nav-link">Cara pemesanan</a>
                       <a class="nav-link" href="/contact" >Kontak kami</a>
-                      <a class="nav-link" href="/login-user" >
+                      <a class="nav-link" href="/loginUser" >
                         <button class="btn-login d-flex">
                           <i class="fas fa-sign-in-alt" style="align-self: center; color:#ffff; margin-right: 5px;"></i>
                           Login
@@ -42,26 +42,35 @@
     <!--end hero section -->
 
     <!-- <div class="container"> -->
-        <div class="login-caption">
-            <form action="{{route('register_user')}}" method="post" >
+        <div class="register-caption">
+            <form action="/register" method="post" >
                 @csrf
                 @method('post')
                   <div class="login-judul text-center">
-                    <h2 style="color: #c9981e;;">Selamat Datang</h2>
+                    <h2 style="color: #ffff;">Selamat Datang</h2>
                   </div>
                   <div class="mb-3">
-                    <label for="nama_pelanggan" class="form-label">Nama</label>
-                    <input type="text" class="form-control  @error('nama_pelanggan') is-invalid @enderror" id="nama_pelanggan" name="nama_pelanggan" required value="{{ old('nama_pelanggan') }}">
-                    @error('nama_pelanggan')
+                    <label for="name" class="form-label">Nama</label>
+                    <input type="text" class="form-control  @error('name') is-invalid @enderror" id="name" name="name" required value="{{ old('name') }}">
+                    @error('name')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
                     @enderror
                   </div>
                   <div class="mb-3">
-                    <label for="username_pelanggan" class="form-label">Username</label>
-                    <input type="text" class="form-control @error('username_pelanggan') is-invalid @enderror" id="username_pelanggan" name="username_pelanggan" required value="{{ old('username_pelanggan') }}">
-                    @error('username_pelanggan')
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" required value="{{ old('username') }}">
+                    @error('username')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                    @enderror
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control @error('username_pelanggan') is-invalid @enderror" id="email" name="email" required value="{{ old('email') }}">
+                    @error('email')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
@@ -77,9 +86,9 @@
                     @enderror
                   </div>
                   <div class="mb-3">
-                    <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control  @error('konfirmasi_password') is-invalid @enderror" id="konfirmasi_password" name="konfirmasi_password" required value="{{ old('konfirmasi_password') }}">
-                    @error('konfirmasi_password')
+                    <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                    <input type="password" class="form-control  @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required value="{{ old('password_confirmation') }}">
+                    @error('password_confirmation')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
