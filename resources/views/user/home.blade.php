@@ -28,45 +28,83 @@
                       <a class="nav-link" href="/produk">Produk</a>
                       <a class="nav-link" href="/cara_pesan">Cara pemesanan</a>
                       <a class="nav-link" href="/contact" >Kontak kami</a>
-                      <a href="/pesanan" class="nav-link">Pesanan</a>
+                     
 
                       @if (Route::has('loginUser'))
-                 
-                        @auth
-                          <div class="cart">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <i class="bi bi-cart3"></i>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/profil-user">Keranjang</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                @foreach ($keranjang as $item)
-                                  <li><p class="dropdown-item">
-                                    {{$item->nama_produk}}
-                                  </p></li>
-                                @endforeach
-                              </ul>
+                        @auth  
+                        <a href="/pesanan" class="nav-link">Pesanan</a> 
+                        <li class="nav-item dropdown">
+                          <a class="btn cart nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <i class="bi bi-cart3"></i>
+                          </a>
+                          <ul class="dropdown-menu menu-cart">
+                            <li class="text-center" style="color: #3C3C3C; font-weight:bold;">List Pesanan</li>
+                            <li><hr class="dropdown-divider"></li>
+                            
+                            @if (sizeof($keranjang) != 0)
+                            @foreach ($keranjang as $item)
+                              <li class="dropdown-item">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <img src="/storage/images/{{$item->foto}}" alt="" class="img-keranjang">
+                                  </div>
+                                  <div class="col-md-6" style="font-size: 13px; font-weight:500;">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <p>
+                                          {{$item->nama_produk}}
+                                          <p style="margin-top: -10px;">Rp. {{ number_format($item->total_harga, 2) }}</p>
+                                        </p>
+                                      </div>
+                                      <div class="col-md-6 text-center">
+                                        Jml : {{$item->jml_keranjang}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <form action="/hapus_keranjang" method="post">
+                                      @csrf
+                                      <input type="hidden" name="id_keranjang" value="{{ $item->id_keranjang }}">
+                                      <button type="submit" class="btn btn-hapusKeranjang">
+                                        <i class="bi bi-trash3"></i>
+                                      </button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </li>
+                            @endforeach
+                            @else
+                              <li class="dropdown-item text-center">
+                                <p>produk kosong</p>
+                              </li>
+                            @endif
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="text-center">
+                              <form action="" method="">
+                                <button class="btn btn-bayar">
+                                  Bayar
+                                </button>
+                              </form>
                             </li>
-                          </div>
-        
-                          <div class="auth-user">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <i class="bi bi-person-fill"></i>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li class="text-center" style="color: #3C3C3C; font-weight:bold;">{{ Auth::User()->name }}</li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/profil-user">Profil</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a></li>
-                              </ul>
-                            </li>
-                            <form id="logout-form" action="/logout" method="POST">
-                              @csrf
-                            </form>
-                          </div>
+                          </ul>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                          <a class="btn auth-user nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <i class="bi bi-person-fill"></i>
+                          </a>
+                          <ul class="dropdown-menu menu-profil">
+                            <li class="text-center" style="color: #3C3C3C; font-weight:bold;">{{ Auth::User()->name }}</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/profil-user">Profil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a></li>
+                          </ul>
+                        </li>
+                        <form id="logout-form" action="/logout" method="POST">
+                          @csrf
+                        </form>
+                          
                         @else
                           <a class="nav-link" href="/loginUser" >
                             <button class="btn-login d-flex">
@@ -149,7 +187,7 @@
                   <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor1.jpeg" class="card-img-top" alt="...">
+                        <img src="./images/dekor1.jpeg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">Background Minimalis</h5>
                           <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
@@ -158,7 +196,7 @@
                     </div>
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor3.jpeg" class="card-img-top" alt="...">
+                        <img src="./images/dekor3.jpeg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">Harga Terjangkau</h5>
                           <!-- <p class="card-text">This is a short card.</p> -->
@@ -167,7 +205,7 @@
                     </div>
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor4.jpeg" class="card-img-top" alt="...">
+                        <img src="./images/dekor4.jpeg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">Desain Variatif</h5>
                           <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
@@ -176,7 +214,7 @@
                     </div>
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor6.jpg" class="card-img-top" alt="...">
+                        <img src="./images/dekor6.jpg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">Item Lengkap</h5>
                           <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
@@ -185,7 +223,7 @@
                     </div>
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor5.jpeg" class="card-img-top" alt="...">
+                        <img src="./images/dekor5.jpeg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">Request Warna</h5>
                           <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
@@ -194,7 +232,7 @@
                     </div>
                     <div class="col">
                       <div class="card h-100 card-1">
-                        <img src="./images/dekor21.jpeg" class="card-img-top" alt="...">
+                        <img src="./images/dekor21.jpeg" class="card-img-top home-img" alt="...">
                         <div class="card-body">
                           <h5 class="card-title text-center">indoor/Outdoor</h5>
                           <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
@@ -209,11 +247,11 @@
     {{-- section footer --}}
     <div class="footer">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row row row-cols-2 g-4">
+          <div class="col">
             <p>Copyright © 2022 Tunas-Muda. All rights reserved.</p>
           </div>
-          <div class="col-md-6 me-auto">
+          <div class="col me-auto">
             <p style="float: right">Watugede, Jatisrono, Wonogiri</p>
           </div>
         </div>

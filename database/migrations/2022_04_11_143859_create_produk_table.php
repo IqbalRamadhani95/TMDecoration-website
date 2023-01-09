@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('foto');
             $table->string('nama_produk');
             $table->string('deskripsi');
-            $table->string('kategori');
             $table->integer('jumlah_produk');
             $table->integer('harga_sewa');
+            $table->string('status_produk');
             $table->timestamps();
         });
     }

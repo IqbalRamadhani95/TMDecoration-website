@@ -5,24 +5,30 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\keranjang;
+use App\Models\pemasukan;
+use App\Models\pengeluaran;
+use App\Models\pesanan;
+use App\Models\produk;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class login_adm_controller extends Controller
 {
     public function index(){
-        $data = [
-            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
-                ->where('id_pelanggan', Auth::check() ? Auth::user()->id : null)->get()
-        ];
-        return view('admin.login', $data);
+        return view('admin.login');
     }
 
     public function home(){
         $data = [
-            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
-                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
+            'produk' => produk::all()->count(),
+            'pelanggan' => User::all()->count(),
+            'admin' => Admin::all()->count(),
+            'pesanan' => pesanan::all()->count(),
+            'pemasukan' => pemasukan::sum('harga'),
+            'pengeluaran' => pengeluaran::sum('harga_item')
         ];
+
         return view('admin.home_admin', $data);
     }
 

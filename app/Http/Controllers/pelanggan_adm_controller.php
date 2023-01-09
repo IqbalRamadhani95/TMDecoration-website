@@ -14,13 +14,21 @@ class pelanggan_adm_controller extends Controller
     {
         $data = [
             'users' => User::all(),
-            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
-                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
         ];
 
         return view('admin.pelanggan_admin', $data);
     }
     
+    public function cariNamaPelanggan(Request $request){
+          $data = [
+            'users' => User::when($request->name, function ($query) use ($request){
+                return $query->where('name', 'like', '%'.$request->name.'%');
+            })->get()
+        ];
+
+        return view('admin.pelanggan_admin', $data);
+    }
+
     //insert users
     public function insert_users(Request $request)
     {
@@ -30,10 +38,6 @@ class pelanggan_adm_controller extends Controller
             'email'   => 'required',
             'password' => 'required'
         ]);
-
-        // //upload image
-        // $gambar = $request->file('gambar');
-        // $gambar->storeAs('public/images', $gambar->hashName());
 
         $users = User::create([
             'name'     => $request->name,
@@ -56,11 +60,6 @@ class pelanggan_adm_controller extends Controller
     {
         User::where('id', $request->id)->delete();
         return redirect()->route('rute_users_adm');
-    }
-
-    //edit users
-    public function edit(Request $request){
-        User::where('id', $request->id_users)->get();
     }
 
     //ubah users

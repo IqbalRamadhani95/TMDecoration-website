@@ -12,26 +12,26 @@ class produk_controller extends Controller
     public function index()
     {
         $data = [
-            'produk' => produk::all()
+            'produk' => produk::paginate(3)
         ];
 
         return view('admin.produk_admin', $data);
     }
 
-    public function indexUser()
-    {
+    public function cariNamaProduk(Request $request){
         $data = [
-            'produk' => produk::all(),
-            'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
-            ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
+            'produk' => produk::when($request->name, function ($query) use ($request){
+                return $query->where('nama_produk', 'like', '%'.$request->name.'%');
+            })->paginate(3)
         ];
 
-        return view('user.daftar_produk', $data);
+        return view('admin.produk_admin', $data);
     }
 
     //insert produk
     public function insert_produk(Request $request)
     {
+        $status = 'tersedia';
         $this->validate($request, [
             'gambar'     => 'required|image|mimes:png,jpg,jpeg',
             'nama'     => 'required',
@@ -42,14 +42,15 @@ class produk_controller extends Controller
 
         //upload image
         $gambar = $request->file('gambar');
-        $gambar->storeAs('public/images', $gambar->hashName());
+        $gambar->storeAs('storage/images', $gambar->hashName());
 
         $produk = produk::create([
             'foto'     => $gambar->hashName(),
             'nama_produk'     => $request->nama,
             'deskripsi'   => $request->deskripsi,
             'jumlah_produk'   => $request->jumlah,
-            'harga_sewa'   => $request->harga
+            'harga_sewa'   => $request->harga,
+            'status_produk' => $status
         ]);
 
         if ($produk) {
@@ -104,5 +105,13 @@ class produk_controller extends Controller
         }
         return redirect()->route('rute_produk_adm')->with(['success' => 'Data Berhasil Disimpan!']);
 
+    }
+
+    public function ubahStatusProduk(Request $request){
+        produk::where('id', $request->id_produk)->update([
+            'status_produk' => $request->status
+        ]);
+
+        return redirect('/produk-adm');
     }
 }

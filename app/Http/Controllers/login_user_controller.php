@@ -13,7 +13,9 @@ class login_user_controller extends Controller
     public function index(){
         $data = [
             'keranjang'=>keranjang::join('produk', 'produk.id', '=' , 'keranjang.id_produk')
-                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)->get()
+                ->where('id_pelanggan',  Auth::check() ? Auth::user()->id : null)
+                ->select('keranjang.*','keranjang.jumlah_produk as jml_keranjang','produk.*')
+                ->get()
         ];
         return view('user.login_user', $data);
     }
