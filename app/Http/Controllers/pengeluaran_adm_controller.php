@@ -63,16 +63,4 @@ class pengeluaran_adm_controller extends Controller
         pengeluaran::where('id', $request->id)->delete();
         return redirect('./pengeluaran');
     }
-
-    public function cekTanggal(Request $request){
-        $tanggal_mulai = $request->tanggal_mulai;
-        $tanggal_selesai = $request->tanggal_selesai;
-
-        $data = [
-            'pengeluaran' => pengeluaran::whereDate('tanggal_beli', '>=', $tanggal_mulai)
-            ->whereDate('tanggal_beli', '<=', $tanggal_selesai)
-            ->get()
-        ];
-        return view('admin.pengeluaran', $data);
-    }
 }

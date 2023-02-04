@@ -42,7 +42,7 @@ class produk_controller extends Controller
 
         //upload image
         $gambar = $request->file('gambar');
-        $gambar->storeAs('storage/images', $gambar->hashName());
+        $gambar->storeAs('images', $gambar->hashName());
 
         $produk = produk::create([
             'foto'     => $gambar->hashName(),

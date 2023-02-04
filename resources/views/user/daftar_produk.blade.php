@@ -18,7 +18,7 @@
             @if ($item->status_produk == 'tersedia')
             <div class="col">
               <div class="card list-produk h-100">
-                <img src="{{ asset('storage/app/images/' . $item->foto) }}" class="card-img-top" alt="...">
+                <img src="{{ asset('storage/images/' . $item->foto) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title text-center">{{$item->nama_produk}}</h5>
                   <p class="card-text ct-2 d-flex">
